@@ -160,7 +160,17 @@
             .footer-center { gap: 5px; }
             .footer-right { text-align: center; font-size: 0.65rem; }
         }
-    </style>
+    <style>
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #1a1a1a; border: 1px solid rgba(229, 184, 66, 0.5); border-radius: 16px; padding: 30px; text-align: center; max-width: 320px; box-shadow: 0 0 30px rgba(229, 184, 66, 0.15); animation: fadeIn 0.3s ease; }
+        .modal-box i { color: var(--accent-gold); font-size: 2rem; margin-bottom: 15px; }
+        .modal-box h3 { font-size: 1.1rem; margin-bottom: 10px; color: #fff; }
+        .modal-box p { font-size: 0.85rem; color: #a0a0a0; margin-bottom: 20px; }
+        .modal-box button { background: var(--accent-gold); color: #0b0b0b; border: none; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: "Inter", sans-serif; }
+        .modal-box button:hover { background: #fcd34d; transform: translateY(-2px); }
+         fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style></style>
 </head>
 <body>
     <div class="container">
@@ -192,10 +202,10 @@
                 <div class="hero-socials">
                     <a href="https://wa.me/6282313877976"><i class="fab fa-whatsapp"></i></a>
                     <a href="http://t.me/ainnefasarome"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://instagram.com/ainnefasarome/"><i class="fab fa-instagram"></i></a>
+                    <a href="javascript:void(0)" onclick="openModal()"><i class="fab fa-youtube"></i></a>
                     <a href="https://tiktok.com/@ainnefasarome"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fas fa-link"></i></a>
+                    <a href="javascript:void(0)" onclick="openModal()""><i class="fas fa-link"></i></a>
                 </div>
             </div>
         </section>
@@ -218,7 +228,7 @@
                 <div class="link-info"><h4>Telegram</h4><p>Gabung di channel & grup saya</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            <a href="#" class="link-card">
+            <a href="https://instagram.com/ainnefasarome/" class="link-card">
                 <div class="link-icon icon-ig"><i class="fab fa-instagram"></i></div>
                 <div class="link-info"><h4>Instagram</h4><p>Lihat aktivitas & konten terbaru</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
@@ -228,17 +238,17 @@
                 <div class="link-info"><h4>TikTok</h4><p>Video pendek & konten kreatif</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            <a href="#" class="link-card">
+            <a href="javascript:void(0)" onclick="openModal()"" class="link-card">
                 <div class="link-icon icon-yt"><i class="fab fa-youtube"></i></div>
                 <div class="link-info"><h4>YouTube</h4><p>Tonton video terbaru saya</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            <a href="#" class="link-card">
+            <a href="javascript:void(0)" onclick="openModal()"" class="link-card">
                 <div class="link-icon icon-gh"><i class="fab fa-github"></i></div>
                 <div class="link-info"><h4>GitHub</h4><p>Karya & project yang saya buat</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            <a href="#" class="link-card">
+            <a href="javascript:void(0)" onclick="openModal()"" class="link-card">
                 <div class="link-icon icon-web"><i class="fas fa-globe"></i></div>
                 <div class="link-info"><h4>Website</h4><p>Kunjungi situs resmi saya</p></div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
@@ -270,12 +280,12 @@
                 <div class="footer-center">
                     <p>Terhubung dengan saya</p>
                     <div class="footer-socials">
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="#"><i class="fas fa-link"></i></a>
+                        <a href="javascript:void(0)" onclick="openModal()"><i class="fab fa-whatsapp"></i></a>
+                        <a href="javascript:void(0)" onclick="openModal()"><i class="fab fa-telegram"></i></a>
+                        <a href="https://instagram.com/ainnefasarome/"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:void(0)" onclick="openModal()"><i class="fab fa-youtube"></i></a>
+                        <a href="javascript:void(0)" onclick="openModal()"><i class="fab fa-tiktok"></i></a>
+                        <a href="javascript:void(0)" onclick="openModal()""><i class="fas fa-link"></i></a>
                     </div>
                 </div>
                 <div class="footer-right">
@@ -284,5 +294,42 @@
             </div>
         </footer>
     </div>
+<div class="modal-overlay" id="myModal">
+        <div class="modal-box">
+            <i class="fas fa-info-circle"></i>
+            <h3>Lembo Ade</h3>
+            <p>Untuk saat ini tidak tersedia</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+<script>
+        function openModal() { document.getElementById("myModal").classList.add("active"); }
+        function closeModal() { document.getElementById("myModal").classList.remove("active"); }
+        document.getElementById("myModal").addEventListener("click", function(e) { if (e.target === this) { closeModal(); } });
+    </script>
+<div class="modal-overlay" id="myModal">
+        <div class="modal-box">
+            <i class="fas fa-info-circle"></i>
+            <h3>Lembo Ade</h3>
+            <p>Untuk saat ini tidak tersedia</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+<style>
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #1a1a1a; border: 1px solid rgba(229, 184, 66, 0.5); border-radius: 16px; padding: 30px; text-align: center; max-width: 320px; box-shadow: 0 0 30px rgba(229, 184, 66, 0.15); animation: fadeIn 0.3s ease; }
+        .modal-box i { color: var(--accent-gold); font-size: 2rem; margin-bottom: 15px; }
+        .modal-box h3 { font-size: 1.1rem; margin-bottom: 10px; color: #fff; }
+        .modal-box p { font-size: 0.85rem; color: #a0a0a0; margin-bottom: 20px; }
+        .modal-box button { background: var(--accent-gold); color: #0b0b0b; border: none; padding: 10px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: "Inter", sans-serif; }
+        .modal-box button:hover { background: #fcd34d; transform: translateY(-2px); }
+         fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+<script>
+        function openModal() { document.getElementById("myModal").classList.add("active"); }
+        function closeModal() { document.getElementById("myModal").classList.remove("active"); }
+        document.getElementById("myModal").addEventListener("click", function(e) { if (e.target === this) { closeModal(); } });
+    </script>
 </body>
 </html>
