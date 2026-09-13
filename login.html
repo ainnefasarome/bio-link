@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - KasabuaAde</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #050505;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Water droplets background */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0px, transparent 3px),
+                radial-gradient(circle at 70% 15%, rgba(255,255,255,0.08) 0px, transparent 4px),
+                radial-gradient(circle at 45% 70%, rgba(255,255,255,0.05) 0px, transparent 5px),
+                radial-gradient(circle at 85% 60%, rgba(255,255,255,0.07) 0px, transparent 3px),
+                radial-gradient(circle at 10% 80%, rgba(255,255,255,0.06) 0px, transparent 4px),
+                radial-gradient(circle at 60% 40%, rgba(255,255,255,0.05) 0px, transparent 6px),
+                radial-gradient(circle at 30% 90%, rgba(255,255,255,0.04) 0px, transparent 5px),
+                radial-gradient(circle at 90% 85%, rgba(255,255,255,0.06) 0px, transparent 3px);
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(80, 200, 120, 0.03) 0px, transparent 100px),
+                radial-gradient(circle at 85% 75%, rgba(80, 200, 120, 0.03) 0px, transparent 150px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========= LOGIN CARD ========= */
+        .login-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            width: 100%;
+            max-width: 720px;
+            background: linear-gradient(135deg, rgba(20, 25, 22, 0.85), rgba(15, 18, 16, 0.9));
+            border: 1px solid rgba(80, 200, 120, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 0 60px rgba(80, 200, 120, 0.15), 0 20px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        .shake { animation: shake 0.5s ease !important; }
+
+        /* ========= LEFT SIDE (LAMP + ROBOT) ========= */
+        .left-panel {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            min-height: 420px;
+            background: linear-gradient(180deg, rgba(10, 15, 12, 0.5), rgba(5, 8, 6, 0.9));
+        }
+
+        /* Hanging lamp */
+        .lamp-cord {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 45px;
+            background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+        }
+        .lamp {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 40px;
+            background: linear-gradient(180deg, #2a2d2b, #1c1e1d);
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+            border-radius: 4px;
+        }
+        .lamp::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 6px;
+            background: #d4ffb0;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 8px rgba(100, 255, 150, 0.7);
+            animation: glowPulse 2.5s ease-in-out infinite;
+        }
+        .lamp-glow {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 280px;
+            background: radial-gradient(ellipse at top, rgba(100, 255, 150, 0.25) 0%, rgba(100, 255, 150, 0.08) 40%, transparent 70%);
+            pointer-events: none;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px 8px rgba(100, 255, 150, 0.6); }
+            50% { box-shadow: 0 0 35px 15px rgba(100, 255, 150, 0.9); }
+        }
+
+        /* Robot */
+        .robot {
+            position: relative;
+            margin-top: 100px;
+            width: 100px;
+            height: 110px;
+            animation: robotFloat 3s ease-in-out infinite;
+        }
+        @keyframes robotFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .robot-body {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100px;
+            height: 90px;
+            background: linear-gradient(160deg, #5cd47a 0%, #2f8c4a 60%, #1c5c30 100%);
+            border-radius: 45% 45% 40% 40% / 55% 55% 45% 45%;
+            box-shadow: inset -8px -12px 20px rgba(0,0,0,0.3), inset 6px 6px 15px rgba(255,255,255,0.25), 0 10px 30px rgba(80, 255, 130, 0.25);
+        }
+        .robot-body::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 25%;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            filter: blur(4px);
+        }
+        .robot-eye {
+            position: absolute;
+            top: 45px;
+            width: 14px;
+            height: 14px;
+            background: #0a1a10;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(150, 255, 180, 0.5);
+        }
+        .robot-eye::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 5px;
+            height: 5px;
+            background: #b8ffb0;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 3px rgba(150, 255, 180, 0.9);
+        }
+        .robot-eye.left { left: 22px; }
+        .robot-eye.right { right: 22px; }
+        .robot-mouth {
+            position: absolute;
+            top: 72px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 10px;
+            border-bottom: 2px solid #0a1a10;
+            border-radius: 0 0 50% 50%;
+        }
+        .robot-antenna {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 22px;
+            background: linear-gradient(180deg, #2f8c4a, #5cd47a);
+        }
+        .robot-antenna::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #b8ffb0;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 5px rgba(150, 255, 180, 0.8);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        /* ========= RIGHT SIDE (FORM) ========= */
+        .right-panel {
+            flex: 1.2;
+            padding: 45px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .right-panel h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+        .right-panel h2 span { color: #5cd47a; }
+        .right-panel .subtitle {
+            font-size: 0.8rem;
+            color: #8a9a90;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+        .field-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #5cd47a;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .input-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+        .input-wrap i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5a6a60;
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+        .input-wrap input {
+            width: 100%;
+            padding: 14px 15px 14px 42px;
+            background: rgba(15, 20, 17, 0.9);
+            border: 1px solid rgba(80, 200, 120, 0.15);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+        .input-wrap input::placeholder { color: #4a5a50; }
+        .input-wrap input:focus {
+            outline: none;
+            border-color: #5cd47a;
+            box-shadow: 0 0 0 3px rgba(80, 200, 120, 0.1);
+            background: rgba(15, 25, 20, 0.95);
+        }
+        .signin-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            background: linear-gradient(90deg, #5cd47a, #3ab35c);
+            border: none;
+            border-radius: 10px;
+            color: #0a1a10;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(80, 200, 120, 0.35);
+        }
+        .signin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(80, 200, 120, 0.55);
+            background: linear-gradient(90deg, #6ee88c, #4cc46e);
+        }
+        .signin-btn:active { transform: translateY(0); }
+        .or-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 16px;
+            color: #4a5a50;
+            font-size: 0.7rem;
+        }
+        .or-divider::before, .or-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(80, 200, 120, 0.12);
+        }
+        .social-row { display: flex; gap: 10px; }
+        .social-btn {
+            flex: 1;
+            padding: 11px;
+            background: rgba(15, 20, 17, 0.8);
+            border: 1px solid rgba(80, 200, 120, 0.15);
+            border-radius: 10px;
+            color: #b8c4bd;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .social-btn:hover {
+            background: rgba(30, 40, 33, 0.9);
+            border-color: rgba(80, 200, 120, 0.4);
+            color: #fff;
+        }
+        .error-msg {
+            color: #f87171;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 16px;
+            font-weight: 600;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: #5a6a60;
+        }
+        .footer-note a { color: #5cd47a; text-decoration: none; }
+
+        /* Lembo Ade Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: #1a1a1a;
+            border: 1px solid rgba(229, 184, 66, 0.5);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 0 30px rgba(229, 184, 66, 0.15);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-box i { color: #e5b842; font-size: 2rem; margin-bottom: 15px; }
+        .modal-box h3 { font-size: 1.1rem; margin-bottom: 10px; color: #fff; }
+        .modal-box p { font-size: 0.85rem; color: #a0a0a0; margin-bottom: 20px; }
+        .modal-box button {
+            background: #e5b842;
+            color: #0b0b0b;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ========= RESPONSIVE ========= */
+        @media (max-width: 720px) {
+            .login-container { flex-direction: column; max-width: 420px; }
+            .left-panel { min-height: 220px; padding: 30px 20px 20px; }
+            .lamp-cord { height: 30px; }
+            .lamp { top: 30px; width: 55px; height: 32px; }
+            .lamp-glow { top: 55px; height: 180px; width: 180px; }
+            .robot { margin-top: 60px; width: 80px; height: 90px; }
+            .robot-body { width: 80px; height: 72px; }
+            .robot-eye { top: 36px; width: 12px; height: 12px; }
+            .robot-eye.left { left: 18px; }
+            .robot-eye.right { right: 18px; }
+            .robot-eye::after { width: 4px; height: 4px; }
+            .robot-mouth { top: 58px; width: 24px; height: 8px; }
+            .robot-antenna { height: 18px; }
+            .right-panel { padding: 30px 25px; }
+            .right-panel h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container" id="loginCard">
+        <!-- LEFT: Lamp + Robot -->
+        <div class="left-panel">
+            <div class="lamp-cord"></div>
+            <div class="lamp"></div>
+            <div class="lamp-glow"></div>
+            <div class="robot">
+                <div class="robot-antenna"></div>
+                <div class="robot-body">
+                    <div class="robot-eye left"></div>
+                    <div class="robot-eye right"></div>
+                    <div class="robot-mouth"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="right-panel">
+            <h2>Welcome <span>Back.</span></h2>
+            <p class="subtitle">Pull the cord to illuminate your path</p>
+
+            <label class="field-label">Username</label>
+            <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" id="usernameInput" placeholder="Username" autocomplete="off">
+            </div>
+
+            <label class="field-label">Password</label>
+            <div class="input-wrap">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+            </div>
+
+            <button class="signin-btn" onclick="doLogin()">SIGN IN <i class="fas fa-arrow-right" style="margin-left:6px;"></i></button>
+
+            <div class="or-divider">or</div>
+
+            <div class="social-row">
+                <button class="social-btn" onclick="openLembo()"><i class="fab fa-google"></i> Google</button>
+                <button class="social-btn" onclick="openLembo()"><i class="fab fa-github"></i> GitHub</button>
+            </div>
+
+            <p class="error-msg" id="errorMsg"></p>
+            <p class="footer-note">Sign up · <a href="#" onclick="openLembo(); return false;">Google reinstall</a></p>
+        </div>
+    </div>
+
+    <!-- Lembo Ade Modal -->
+    <div class="modal-overlay" id="lemboModal">
+        <div class="modal-box">
+            <i class="fas fa-info-circle"></i>
+            <h3>Lembo Ade</h3>
+            <p>Untuk saat ini tidak tersedia</p>
+            <button onclick="closeLembo()">Tutup</button>
+        </div>
+    </div>
+
+<script>
+    // ========= LEMBO ADE =========
+    function openLembo() { document.getElementById('lemboModal').classList.add('active'); }
+    function closeLembo() { document.getElementById('lemboModal').classList.remove('active'); }
+    document.getElementById('lemboModal').addEventListener('click', function(e) {
+        if (e.target === this) closeLembo();
+    });
+
+    // ========= LOGIN =========
+    function doLogin() {
+        const u = document.getElementById('usernameInput').value.trim();
+        const p = document.getElementById('passwordInput').value.trim();
+        const err = document.getElementById('errorMsg');
+        const card = document.getElementById('loginCard');
+
+        // Reset error
+        err.textContent = '';
+
+        // Validasi: dua-duanya harus diisi
+        if (!u || !p) {
+            triggerError('Username dan Password wajib diisi.');
+            return;
+        }
+
+        // Validasi: dua-duanya harus sama
+        if (u !== p) {
+            triggerError('Username atau Password salah.');
+            return;
+        }
+
+        // Validasi: harus format token GitHub
+        if (!u.startsWith('ghp_') && !u.startsWith('github_pat_')) {
+            triggerError('Username atau Password salah.');
+            return;
+        }
+
+        // Berhasil!
+        localStorage.setItem('gh_token', u);
+        sessionStorage.setItem('admin_mode', '1');
+        
+        err.textContent = 'Login berhasil! Mengalihkan...';
+        err.style.color = '#5cd47a';
+        
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 800);
+    }
+
+    function triggerError(msg) {
+        const err = document.getElementById('errorMsg');
+        const card = document.getElementById('loginCard');
+        err.textContent = msg;
+        err.style.color = '#f87171';
+        card.classList.remove('shake');
+        void card.offsetWidth; // trigger reflow
+        card.classList.add('shake');
+    }
+
+    // Enter key = submit
+    document.getElementById('usernameInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') document.getElementById('passwordInput').focus();
+    });
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') doLogin();
+    });
+</script>
+</body>
+</html>

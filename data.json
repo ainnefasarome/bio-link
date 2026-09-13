@@ -1,0 +1,33 @@
+{
+  "name": "Banghans",
+  "nameHighlight": "",
+  "headerName": "Kasabua",
+  "headerNameHighlight": "Ade",
+  "headerSubtitle": "Satu Link, Semua Akses",
+  "footerName": "Kasabua",
+  "footerNameHighlight": "Ade",
+  "footerSubtitle": "Satu Link, Semua Akses",
+  "tagline": "Bukan Sekadar Link, Ini Tentang Koneksi.",
+  "bio": "Selamat datang di KasabuaAde. Temukan semua akun, platform, dan karya saya dalam satu tempat yang mudah diakses.",
+  "profilePic": "https://ui-avatars.com/api/?name=Kasabua+Ade&background=0D0D0D&color=e5b842&size=200",
+  "logoType": "text",
+  "logoText": "KA",
+  "logoImage": "",
+  "sectionLabel": "AKSES CEPAT",
+  "sectionTitle": "Semua di Satu Tempat",
+  "sectionDesc": "Klik salah satu menu di bawah untuk mengakses langsung ke platform atau layanan yang saya gunakan.",
+  "quoteText": "\"Hal besar selalu dimulai dari satu langkah kecil, dan satu klik.\"",
+  "quoteAuthor": "— KasabuaAde",
+  "footerCenterLabel": "Terhubung dengan saya",
+  "copyrightText": "© 2025 KasabuaAde.<br>All rights reserved.",
+  "links": {
+    "whatsapp": "https://wa.me/6282313877976",
+    "telegram": "http://t.me/ainnefasarome",
+    "instagram": "https://instagram.com/ainnefasarome/",
+    "tiktok": "https://tiktok.com/@ainnefasarome",
+    "youtube": "",
+    "github": "",
+    "website": "",
+    "email": "mailto:ainnefasarome@gmail.com"
+  }
+}
